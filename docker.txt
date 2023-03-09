@@ -1,0 +1,34 @@
+use openshell
+1. zipkin container cmd
+	docker run -p 9411:9411 openzipkin/zipkin:2.24
+
+2.creating docker image
+	2.1  in pom.xml add it under maven plugin             
+			<configuration>
+					<image>
+						<name>ashureddy/mmv2-${project.artifactId}:${project.version}</name>
+					</image>
+					<pullPolicy>IF_NOT_PRESENT</pullPolicy>
+			</configuration>
+	2.2 create mvn build: by adding goal : spring-boot:build-image -DskipTests
+
+for springboot<3 use of zipkin using docker compose:
+	SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411
+
+for springboot 3 use of zipkin using docker compose:
+	MANAGEMENT.ZIPKIN.TRACING.ENDPOINT: http://zipkin-server:9411
+
+
+in Spingboot 2V+:
+	sleuth(Tracing configuration)
+	Brave (Tracer Library)
+	Zipkin
+
+in Springboot 3V+:
+	Micrometer (can hadle logs,Matrics,Traces)
+	Opentelemetry(openstandered for logs,Matrics,Traces)
+	Zipkin
+
+
+
+https://github.com/in28minutes/spring-microservices-v3/blob/main/v3-upgrade.md
